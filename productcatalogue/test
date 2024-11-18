@@ -1,1 +1,72 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = '7abouba/productcatalogue'
+        DOCKERFILE_PATH = 'productcatalogue/Dockerfile'
+        TARGET_FOLDER = 'productcatalogue/target'  // Define path to target folder with the JAR
+    }
+
+    stages {
+        stage('Checkout Source') {
+            steps {
+                script {
+                    git branch: 'main', url: 'https://github.com/azizos001/eCommerce_App.git'
+                }
+            }
+        }
+
+        stage('Build Java Projects for All Microservices') {
+            steps {
+                script {
+                    dir('productcatalogue') {
+                        // Check if the JAR file exists in the target directory
+                        if (!fileExists("${TARGET_FOLDER}/productcatalogue-0.0.1-SNAPSHOT.jar")) {
+                            echo 'JAR file not found. Building the JAR file now.'
+                            // Run Maven to build the JAR if it's not already built
+                            sh 'mvn clean install'
+                        } else {
+                            echo 'Using pre-built JAR from target folder.'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    docker.build("${DOCKER_IMAGE}", "-f ${DOCKERFILE_PATH} productcatalogue")
+                }
+            }
+        }
+
+        stage('Push Docker Images') {
+            steps {
+                script {
+                    docker.withRegistry('', 'docker-hub-credentials') {
+                        docker.image("${DOCKER_IMAGE}").push()
+                    }
+                }
+            }
+        }
+
+        stage('Deploying App to Kubernetes') {
+            steps {
+                script {
+                    sh 'kubectl apply -f k8s/productcatalogue-service.yaml'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check logs for more information.'
+        }
+    }
+}
 
