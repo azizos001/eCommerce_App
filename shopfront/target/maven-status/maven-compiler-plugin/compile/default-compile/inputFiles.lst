@@ -1,9 +1,0 @@
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/services/dto/StockDTO.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/services/dto/ProductDTO.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/resources/ProductResource.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/controllers/HomeController.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/ShopfrontApplication.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/repo/ProductRepo.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/model/Product.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/repo/StockRepo.java
-/home/developer/java-project/docker-Java-kubernetes-project/shopfront/src/main/java/uk/co/danielbryant/djshopping/shopfront/services/ProductService.java
